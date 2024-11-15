@@ -1,10 +1,14 @@
 using db_test.Data;
+using db_test.Entities;
+using db_test.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 var connectionString = builder.Configuration.GetConnectionString("UserDbConnection");
 builder.Services.AddDbContext<UserDbContext>(options =>
