@@ -21,7 +21,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetUsers()
     {
         var users = await _userService.GetUsers();
-        return Ok(users);
+        return Ok(users.Select(user => user.ToDto()).ToList());
     }
 
     [HttpGet("{id}")]

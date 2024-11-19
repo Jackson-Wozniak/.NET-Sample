@@ -17,13 +17,17 @@ public class UserService : IUserService
 
     public async Task<List<User>> GetUsers()
     {
-        var users = await _userContext.Users.ToListAsync();
+        var users = await _userContext.Users
+            .Include(user => user.Addresses)
+            .ToListAsync();
         return users;
     }
 
     public async Task<User> GetUserById(int id)
     {
-        var user = await _userContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+        var user = await _userContext.Users
+            .Include(user => user.Addresses)
+            .FirstOrDefaultAsync(u => u.Id == id);
         if (user == null)
         {
             throw new UserNotFoundException($"No user with key {id}");
