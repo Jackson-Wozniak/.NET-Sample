@@ -1,5 +1,4 @@
 using db_test.Data;
-using db_test.Entities;
 using db_test.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 
 var connectionString = builder.Configuration.GetConnectionString("UserDbConnection");
 builder.Services.AddDbContext<UserDbContext>(options =>
